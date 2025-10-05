@@ -1,0 +1,87 @@
+#ifndef Uart1Driver_HPP
+#define Uart1Driver_HPP
+
+#include "Falco/Drv/Uart1Driver/Uart1DriverComponentAc.hpp"
+#include "Os/Task.hpp"
+#include "uart/plib_uart_common.h"
+#include "xdmac/plib_xdmac_common.h"
+#include "etl/array.h"
+#include "FreeRTOS.h"
+#include "event_groups.h"
+
+namespace Falco {
+
+class Uart1Driver : public Uart1DriverComponentBase {
+  public:
+    const static FwSizeType SERIAL_BUFFER_SIZE = 64;  // Maximum buffer size
+
+    //! Construct object Uart1Driver
+    //!
+    Uart1Driver(const char* compName /*!< The component name*/
+    );
+
+    //! Destroy object Uart1Driver
+    //!
+    ~Uart1Driver(void);
+
+    //! Configure this port
+    //!
+    void configure();
+
+  private:
+    static constexpr NATIVE_UINT_TYPE transmitCompleteWaitMs = 1;
+
+    static constexpr EventBits_t evtTransmitComplete = 1;
+    static constexpr EventBits_t evtError = 2;
+
+    EventGroupHandle_t eventGroupHandleUART1;
+
+    Drv::UART::Diagnostics diagnostics;
+    volatile U32 overrunError;
+    volatile U32 parityError;
+    volatile U32 framingError;
+    volatile U32 receiveBufferFull;
+    U32 transmitBufferOversize;
+    U32 transmitFailed;
+
+    //! Handler implementation for transmit
+    //!
+    //! Take data to write out via UART
+    Drv::UART::WriteStatus transmit_handler(
+        NATIVE_INT_TYPE portNum, //!< The port number
+        Fw::Buffer& buffer, //!< Buffer with data to write from
+        U32 timeoutMs
+    ) override;
+
+    //! Handler implementation for receive
+    //!
+    //! Read data via UART
+    U32 receive_handler(
+        NATIVE_INT_TYPE portNum, //!< The port number
+        Fw::Buffer& buffer, //!< Buffer with data to read to
+        U32 timeoutMs
+    ) override;
+
+    //! Handler implementation for report
+    //!
+    //! Report UART diagnostics
+    Drv::UART::Diagnostics report_handler(
+        NATIVE_INT_TYPE portNum //!< The port number
+    ) override;
+
+    bool write_data(Fw::Buffer& buffer, U32 timeoutMs);
+
+    bool startTransmission(Fw::Buffer& buffer);
+    bool waitTransmissionEnd(U32 timeoutMs);
+
+    static void transmitCallback(XDMAC_TRANSFER_EVENT event, uintptr_t thisObjects);
+    void transmitCallbackHandler(XDMAC_TRANSFER_EVENT event);
+
+    static void receiveCallback(UART_EVENT event, uintptr_t thisObjects);
+    void receiveCallbackHandler(UART_EVENT event);
+
+};
+
+}  // end namespace Falco
+
+#endif

@@ -1,0 +1,51 @@
+# fprime items
+logs/
+top/
+cmake-build-*
+build-artifacts/
+build-fprime-*
+*-template
+*.template.cpp
+*.template.hpp
+
+# Misc
+/venv/
+/fprime-venv/
+/.idea/
+# /.vscode/
+.DS_Store
+*.gcov
+out/
+CMakePresets.json
+
+### MPLabX template
+#Ignore List for Microchip's MPLAB X IDE
+#It's a form of NetBeans with vendor specific changes
+#Taken from zeha on GIST https://gist.github.com/zeha/5999375
+#Updated by Cristian Cristea (https://github.com/cristiancristea00)
+
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/*.pre
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/*.p1
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/*.lst
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/*.sym
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/*.sdb
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/*.obj.dmp
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/*.mk
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/*.properties
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/*.production
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/*.debug
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/html
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/nbproject/private
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/nbproject/Package-*.bash
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/build
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/nbbuild
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/dist
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/nbdist
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/nbactions.xml
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/nb-configuration.xml
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/funclist
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/nbproject/Makefile-*
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/disassembly
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/.generated_files
+
+fprime-falco/HAL_MMCU/firmware/HAL_MMCU.X/*.bak*
