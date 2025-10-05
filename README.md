@@ -1,4 +1,4 @@
-# FPrime_SBC F' project
+# Falco F' project
 
 ## WSL installation and usbipd configuration (for Windows users)
 1. Install WSL and 22.04 LTS
@@ -227,7 +227,7 @@ cd
 git clone https://github.com/Gonta01/falco.git
 ```
 ```
-cd fprime_sbc
+cd falco
 ```
 Checkout branch:
 ```
